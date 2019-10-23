@@ -100,7 +100,6 @@ public class Program
         {
             Console.WriteLine("TASK IS NOT DONE.");
         }
-        Console.ReadKey();
     }
 
     private static void TestReturnedValues(int testCaseNumber, int[][] array, bool expectedResult, int expectedMin, int expectedMax)
