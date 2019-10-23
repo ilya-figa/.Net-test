@@ -1,5 +1,5 @@
 using System;
-		
+
 // Задача: реализовать метод CountVowels, который должен подсчитывать количество гласных символов в переданной строке.
 //   * Гласными считаются символы - 'a', 'e', 'i', 'o', 'u'.
 //   * Метод должен выбрасывать исключение ArgumentNullException в случае, если в метод передали null.
@@ -7,72 +7,92 @@ using System;
 
 public class Program
 {
-	public static int CountVowels(string s)
-	{
-		// ИЗМЕНИТЕ КОД ЭТОГО МЕТОДА
-		return -1;
-	}
+    public static int CountVowels(string s)
+    {
+        try
+        {
+            if (s == null)
+            {
+                throw new ArgumentNullException();
+            }
+            char[] ch = new char[] { 'a', 'e', 'i', 'o', 'u' };
+            int sum = 0;
+            for (int i = 0; i < s.Length; i++)
+            {
+                for (int j = 0; j < ch.Length; j++)
+                    if ((s[i] == ch[j]) && (s[i] != ' '))
+                        sum++;
+            }
+            return sum;
+        }
+        catch (ArgumentNullException ex)
+        {
+            Console.WriteLine(ex);
+            throw;
+        }
+    }
 
-	// ----- ЗАПРЕЩЕНО ИЗМЕНЯТЬ КОД МЕТОДОВ, КОТОРЫЕ НАХОДЯТСЯ НИЖЕ -----
+    // ----- ЗАПРЕЩЕНО ИЗМЕНЯТЬ КОД МЕТОДОВ, КОТОРЫЕ НАХОДЯТСЯ НИЖЕ -----
 
-	public static void Main()
-	{
-		Console.WriteLine("Task is done when all test cases are correct:");
-		
-		int testCaseNumber = 1;
+    public static void Main()
+    {
+        Console.WriteLine("Task is done when all test cases are correct:");
 
-		TestReturnedValues(testCaseNumber++, "", 0);
-		TestReturnedValues(testCaseNumber++, " ", 0);
-		TestReturnedValues(testCaseNumber++, "a", 1);
-		TestReturnedValues(testCaseNumber++, "b", 0);
-		TestReturnedValues(testCaseNumber++, "ab", 1);
-		TestReturnedValues(testCaseNumber++, "ba", 1);
-		TestReturnedValues(testCaseNumber++, "aba", 2);
-		TestReturnedValues(testCaseNumber++, "bab", 1);
-		TestReturnedValues(testCaseNumber++, "aeiou", 5);
-		TestReturnedValues(testCaseNumber++, "bacedifoguh", 5);
-		TestReturnedValues(testCaseNumber++, "Lorem ipsum dolor sit amet", 9);
-		TestException<ArgumentNullException>(testCaseNumber++, null);
-	}
-	
-	private static void TestReturnedValues(int testCaseNumber, string s, int expectedResult)
-	{
-		try
-		{
-			if (CountVowels(s) == expectedResult)
-			{
-				Console.WriteLine(correctCaseTemplate, testCaseNumber);
-			}
-			else
-			{
-				Console.WriteLine(incorrectCaseTemplate, testCaseNumber);
-			}
-		}
-		catch(Exception)
-		{
-			Console.WriteLine(correctCaseTemplate, testCaseNumber);
-		}
-	}
-	
-	private static void TestException<T>(int testCaseNumber, string s) where T : Exception
-	{
-		try
-		{
-			CountVowels(s);
-			Console.WriteLine(incorrectCaseTemplate, testCaseNumber);
-		}
-		catch (ArgumentException)
-		{
-			Console.WriteLine(correctCaseTemplate, testCaseNumber);
-			correctTestCaseAmount++;
-		}
-		catch (Exception)
-		{
-			Console.WriteLine(incorrectCaseTemplate, testCaseNumber);
-		}
-	}
+        int testCaseNumber = 1;
 
-	private static string correctCaseTemplate = "Case #{0} is correct.";
-	private static string incorrectCaseTemplate = "Case #{0} IS NOT CORRECT";
-	private static int correctTestCaseAmount = 0;
+        TestReturnedValues(testCaseNumber++, "", 0);
+        TestReturnedValues(testCaseNumber++, " ", 0);
+        TestReturnedValues(testCaseNumber++, "a", 1);
+        TestReturnedValues(testCaseNumber++, "b", 0);
+        TestReturnedValues(testCaseNumber++, "ab", 1);
+        TestReturnedValues(testCaseNumber++, "ba", 1);
+        TestReturnedValues(testCaseNumber++, "aba", 2);
+        TestReturnedValues(testCaseNumber++, "bab", 1);
+        TestReturnedValues(testCaseNumber++, "aeiou", 5);
+        TestReturnedValues(testCaseNumber++, "bacedifoguh", 5);
+        TestReturnedValues(testCaseNumber++, "Lorem ipsum dolor sit amet", 9);
+        TestException<ArgumentNullException>(testCaseNumber++, null);
+        Console.ReadKey();
+    }
+
+    private static void TestReturnedValues(int testCaseNumber, string s, int expectedResult)
+    {
+        try
+        {
+            if (CountVowels(s) == expectedResult)
+            {
+                Console.WriteLine(correctCaseTemplate, testCaseNumber);
+            }
+            else
+            {
+                Console.WriteLine(incorrectCaseTemplate, testCaseNumber);
+            }
+        }
+        catch (Exception)
+        {
+            Console.WriteLine(correctCaseTemplate, testCaseNumber);
+        }
+    }
+
+    private static void TestException<T>(int testCaseNumber, string s) where T : Exception
+    {
+        try
+        {
+            CountVowels(s);
+            Console.WriteLine(incorrectCaseTemplate, testCaseNumber);
+        }
+        catch (ArgumentException)
+        {
+            Console.WriteLine(correctCaseTemplate, testCaseNumber);
+            correctTestCaseAmount++;
+        }
+        catch (Exception)
+        {
+            Console.WriteLine(incorrectCaseTemplate, testCaseNumber);
+        }
+    }
+
+    private static string correctCaseTemplate = "Case #{0} is correct.";
+    private static string incorrectCaseTemplate = "Case #{0} IS NOT CORRECT";
+    private static int correctTestCaseAmount = 0;
 }
