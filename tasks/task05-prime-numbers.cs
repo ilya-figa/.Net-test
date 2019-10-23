@@ -14,33 +14,39 @@ public class Program
     {
         try
         {
-
-            string str = string.Empty;
-
-            //if (array == null)
-            //{
-            //    throw new ArgumentNullException();
-            //}
-
-            for (int i = start; i <= end; i++)
+            if (start > 1 && end > 1 && start <= end)
             {
-                if (isSimple(i))
+                string str = string.Empty;
+
+                //if (array == null)
+                //{
+                //    throw new ArgumentNullException();
+                //}
+
+                for (int i = start; i <= end; i++)
                 {
-                    str += i + "_";
+                    if (isSimple(i))
+                    {
+                        str += i + "_";
+                    }
                 }
+                //Console.WriteLine(str);
+
+                string[] arrstr = str.Split('_');
+
+                int[] array = new int[arrstr.Length - 1];
+
+                for (int i = 0; i < array.Length; i++)
+                {
+                    array[i] = Convert.ToInt32(arrstr[i]);
+                }
+
+                return array;
             }
-            Console.WriteLine(str);
-
-            string[] arrstr = str.Split('_');
-
-            int[] array = new int[arrstr.Length - 1];
-
-            for (int i = 0; i < array.Length; i++)
+            else
             {
-                array[i] = Convert.ToInt32(arrstr[i]);
+                throw new ArgumentNullException();
             }
-
-            return array;
         }
         catch (ArgumentException ex)
         {
@@ -79,8 +85,8 @@ public class Program
         TestException<ArgumentException>(testCaseNumber++, -1, 100);
         TestException<ArgumentException>(testCaseNumber++, 0, 0);
         TestException<ArgumentException>(testCaseNumber++, 0, 100);
-        TestException<ArgumentException>(testCaseNumber++, 1, 1);
-        TestException<ArgumentException>(testCaseNumber++, 1, 100);
+        TestException<ArgumentException>(testCaseNumber++, 1, 1);//11
+        TestException<ArgumentException>(testCaseNumber++, 1, 100);//12
         TestException<ArgumentException>(testCaseNumber++, 2, -1);
         TestException<ArgumentException>(testCaseNumber++, 2, 0);
         TestException<ArgumentException>(testCaseNumber++, 2, 1);
