@@ -52,7 +52,6 @@ public class Program
         TestReturnedValues(testCaseNumber++, "bacedifoguh", 5);
         TestReturnedValues(testCaseNumber++, "Lorem ipsum dolor sit amet", 9);
         TestException<ArgumentNullException>(testCaseNumber++, null);
-        Console.ReadKey();
     }
 
     private static void TestReturnedValues(int testCaseNumber, string s, int expectedResult)
